@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShovelKnightDigAP", "ShovelKnightDigAP.csproj", "{D8750D9A-2C31-C427-3D98-1B8BD0314ACA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8750D9A-2C31-C427-3D98-1B8BD0314ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8750D9A-2C31-C427-3D98-1B8BD0314ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8750D9A-2C31-C427-3D98-1B8BD0314ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8750D9A-2C31-C427-3D98-1B8BD0314ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F442A91-2498-4E39-971A-1AF87C39E55B}
+	EndGlobalSection
+EndGlobal
