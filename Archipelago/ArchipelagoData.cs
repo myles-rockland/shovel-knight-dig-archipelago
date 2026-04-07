@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace ShovelKnightDigAP.Archipelago;
+namespace ShovelKnightDigAPClient.Archipelago;
 
 public class ArchipelagoData
 {

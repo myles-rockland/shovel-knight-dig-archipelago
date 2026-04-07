@@ -7,14 +7,14 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Archipelago.MultiClient.Net.Packets;
-using ShovelKnightDigAP.Utils;
+using ShovelKnightDigAPClient.Utils;
 
-namespace ShovelKnightDigAP.Archipelago;
+namespace ShovelKnightDigAPClient.Archipelago;
 
 public class ArchipelagoClient
 {
     public const string APVersion = "0.5.0";
-    private const string Game = "My Game";
+    private const string Game = "Shovel Knight Dig";
 
     public static bool Authenticated;
     private bool attemptingConnection;

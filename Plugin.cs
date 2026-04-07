@@ -1,16 +1,16 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using ShovelKnightDigAP.Archipelago;
-using ShovelKnightDigAP.Utils;
+using ShovelKnightDigAPClient.Archipelago;
+using ShovelKnightDigAPClient.Utils;
 using UnityEngine;
 
-namespace ShovelKnightDigAP;
+namespace ShovelKnightDigAPClient;
 
 [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
 public class Plugin : BaseUnityPlugin
 {
-    public const string PluginGUID = "com.rockm.shovelknightdigap";
-    public const string PluginName = "ShovelKnightDigAP";
+    public const string PluginGUID = "com.rockm.shovelknightdigapclient";
+    public const string PluginName = "ShovelKnightDigAPClient";
     public const string PluginVersion = "0.0.0";
 
     public const string ModDisplayInfo = $"{PluginName} v{PluginVersion}";
@@ -39,7 +39,7 @@ public class Plugin : BaseUnityPlugin
         if (ArchipelagoClient.Authenticated)
         {
             // if your game doesn't usually show the cursor this line may be necessary
-            // Cursor.visible = false;
+            Cursor.visible = false;
 
             statusMessage = " Status: Connected";
             GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);
@@ -47,7 +47,7 @@ public class Plugin : BaseUnityPlugin
         else
         {
             // if your game doesn't usually show the cursor this line may be necessary
-            // Cursor.visible = true;
+            Cursor.visible = true;
 
             statusMessage = " Status: Disconnected";
             GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);

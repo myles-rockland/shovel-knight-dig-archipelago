@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
-using ShovelKnightDigAP.Archipelago;
+using ShovelKnightDigAPClient.Archipelago;
 using UnityEngine;
 
-namespace ShovelKnightDigAP.Utils;
+namespace ShovelKnightDigAPClient.Utils;
 
 // shamelessly stolen from oc2-modding https://github.com/toasterparty/oc2-modding/blob/main/OC2Modding/GameLog.cs
 public static class ArchipelagoConsole
