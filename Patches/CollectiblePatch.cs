@@ -17,14 +17,14 @@ namespace ShovelKnightDigAPClient.Patches
                 Plugin.BepinLogger.LogMessage($"Cog {__instance.GetComponent<GearCollectible>().ProgressionIndex} collected in {StageController.Theme.ToString()}!");
                 //Plugin.ArchipelagoClient.SendMessage("Gear Collected");
 
-                // Loop through permanent items, when you find the fire ring, add it via Inventory.Player1Inventory.AddPermItem(item);
                 foreach (var item in Inventory.Player1Inventory.m_PermanentUpgradeItems)
                 {
-                    if (item.m_ID == "FIRE_RING")
+                    if (item.m_ID == "FIRE_RING" && !Inventory.Player1Inventory.DoesPlayerHavePermItem(item))
                     {
+                        Plugin.BepinLogger.LogMessage($"Unlocking fire ring!");
                         Inventory.Player1Inventory.AddPermItem(item);
+                        break;
                     }
-                    break;
                 }
             }
         }
