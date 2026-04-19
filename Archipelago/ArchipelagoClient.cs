@@ -14,7 +14,7 @@ namespace ShovelKnightDigAPClient.Archipelago;
 public class ArchipelagoClient
 {
     public const string APVersion = "0.5.0";
-    private const string Game = "Shovel Knight Dig";
+    private const string Game = "Shovel Knight Pocket Dungeon";
 
     public static bool Authenticated;
     private bool attemptingConnection;

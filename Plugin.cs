@@ -14,7 +14,7 @@ namespace ShovelKnightDigAPClient
     {
         public const string PluginGUID = "com.rockm.shovelknightdigapclient";
         public const string PluginName = "ShovelKnightDigAPClient";
-        public const string PluginVersion = "0.0.0";
+        public const string PluginVersion = "0.0.1";
 
         private Harmony _harmony = new Harmony(PluginGUID);
 
