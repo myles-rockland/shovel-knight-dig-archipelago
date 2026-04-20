@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ShovelKnightDigAPClient.Utils
 {
@@ -65,7 +63,7 @@ namespace ShovelKnightDigAPClient.Utils
             { 1, "COG_STRING" },
             { 2, "" }, // Altius. Not an item
             { 3, "KEY_SKELETON" }, // This is a special case since it never really gets "unlocked"
-            { 4, "FOLLOW_CONTAINER_1" }, // Follow Slot Upgrade. There is FOLLOW_CONTAINER_1 and FOLLOW_CONTAINER_2...
+            { 4, "" }, // Follow Slot Upgrade. There is FOLLOW_CONTAINER_1 and FOLLOW_CONTAINER_2...
             { 5, "" }, // Gems. Not an item
 
             { 10, "BOSS_BAD_NEWS" },

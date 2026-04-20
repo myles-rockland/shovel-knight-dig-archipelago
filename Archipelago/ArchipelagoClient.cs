@@ -149,6 +149,7 @@ public class ArchipelagoClient
         // TODO reward the item here
         // if items can be received while in an invalid state for actually handling them, they can be placed in a local
         // queue/collection to be handled later
+        ReceivedItemHandler.Handle(receivedItem);
     }
 
     /// <summary>
