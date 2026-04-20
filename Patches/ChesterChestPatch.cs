@@ -17,7 +17,7 @@ namespace ShovelKnightDigAPClient.Patches
 
                 if (__instance.gameObject.GetComponent<InGameShop>().m_ItemCatalogue[0].m_ID == "COG_STRING")
                 {
-                    if (SaveManager.GetInt("ap received cog") == 0)
+                    if (SaveManager.GetInt("ap received cog string") == 0)
                     {
                         __instance.CreateItemList();
                         EnchantressQuest.Instance.ChesterHasSoldCogOnString = false;
