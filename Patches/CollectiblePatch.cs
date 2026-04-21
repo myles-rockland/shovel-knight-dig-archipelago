@@ -6,8 +6,6 @@ namespace ShovelKnightDigAPClient.Patches
     [HarmonyPatch(typeof(Collectible))]
     public class CollectiblePatch
     {
-        public static Action<Collectible> onCollectibleCollected;
-
         [HarmonyPatch(nameof(Collectible.Collect))]
         [HarmonyPostfix]
         public static void CheckCog(Collectible __instance)
@@ -15,7 +13,12 @@ namespace ShovelKnightDigAPClient.Patches
             if (__instance.m_Type == Collectible.TYPE.COG)
             {
                 Plugin.BepinLogger.LogMessage($"Cog {__instance.GetComponent<GearCollectible>().ProgressionIndex} collected in {StageController.Theme.ToString()}!");
-                //Plugin.ArchipelagoClient.SendMessage("Gear Collected");
+
+                if (StageController.Theme == StageController.THEME_ID.MUSHROOM
+                    && __instance.GetComponent<GearCollectible>().ProgressionIndex == 0) // TODO: Change this into a map
+                {
+                    Plugin.ArchipelagoClient.CheckLocation(3);
+                }
             }
         }
     }

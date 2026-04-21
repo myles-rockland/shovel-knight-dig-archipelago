@@ -4,6 +4,7 @@ using System.Threading;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.Exceptions;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Archipelago.MultiClient.Net.Packets;
@@ -14,7 +15,7 @@ namespace ShovelKnightDigAPClient.Archipelago;
 public class ArchipelagoClient
 {
     public const string APVersion = "0.5.0";
-    private const string Game = "Shovel Knight Pocket Dungeon";
+    private const string Game = "Shovel Knight Dig";
 
     public static bool Authenticated;
     private bool attemptingConnection;
@@ -42,6 +43,23 @@ public class ArchipelagoClient
         }
 
         TryConnect();
+    }
+
+    public void CheckLocation(long id)
+    {
+        try
+        {
+            session.Locations.CompleteLocationChecks(id);
+        }
+        catch (Exception e)
+        {
+            Plugin.BepinLogger.LogError(e);
+        }
+    }
+
+    public void SetGoalAchieved()
+    {
+        session.SetGoalAchieved();
     }
 
     /// <summary>
@@ -146,9 +164,6 @@ public class ArchipelagoClient
 
         ServerData.Index++;
 
-        // TODO reward the item here
-        // if items can be received while in an invalid state for actually handling them, they can be placed in a local
-        // queue/collection to be handled later
         ReceivedItemHandler.Handle(receivedItem);
     }
 
@@ -172,4 +187,6 @@ public class ArchipelagoClient
         Plugin.BepinLogger.LogError($"Connection to Archipelago lost: {reason}");
         Disconnect();
     }
+
+
 }
