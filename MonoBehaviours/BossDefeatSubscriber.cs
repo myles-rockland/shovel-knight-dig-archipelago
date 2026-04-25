@@ -35,7 +35,7 @@ namespace ShovelKnightDigAPClient.MonoBehaviours
 
             if (id == 10) // TODO: This should be moved out to some APGoalHandler, since options can change goal so this might not be our goal
             {
-                Plugin.ArchipelagoClient.SetGoalAchieved();
+                Plugin.ArchipelagoClient.Session.SetGoalAchieved();
             }
         }
     }

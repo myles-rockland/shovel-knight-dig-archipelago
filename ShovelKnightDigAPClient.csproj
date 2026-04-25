@@ -60,5 +60,9 @@
         <HintPath>lib\Assembly-CSharp.dll</HintPath>
       </Reference>
     </ItemGroup>
-
+	
+	<ItemGroup>
+	  <EmbeddedResource Include="assetbundles\ap" />
+	</ItemGroup>
+	
 </Project>

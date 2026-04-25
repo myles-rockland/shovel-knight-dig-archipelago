@@ -1,14 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using Archipelago.MultiClient.Net;
+﻿using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Exceptions;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
+using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
 using ShovelKnightDigAPClient.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ShovelKnightDigAPClient.Archipelago;
 
@@ -23,6 +26,7 @@ public class ArchipelagoClient
     public static ArchipelagoData ServerData = new();
     private DeathLinkHandler DeathLinkHandler;
     private ArchipelagoSession session;
+    public ArchipelagoSession Session => session;
 
     /// <summary>
     /// call to connect to an Archipelago session. Connection info should already be set up on ServerData
@@ -57,9 +61,22 @@ public class ArchipelagoClient
         }
     }
 
-    public void SetGoalAchieved()
+    public void ScoutLocations(Action<Dictionary<long, ScoutedItemInfo>> onSuccessCallback, Action<Exception> onFailureCallback = null, params long[] ids)
     {
-        session.SetGoalAchieved();
+        _ = ScoutLocationsAsync(onSuccessCallback, onFailureCallback, ids);
+    }
+
+    private async Task ScoutLocationsAsync(Action<Dictionary<long, ScoutedItemInfo>> onSuccessCallback, Action<Exception> onFailureCallback = null, params long[] ids)
+    {
+        try
+        {
+            var locationToItem = await session.Locations.ScoutLocationsAsync(ids);
+            onSuccessCallback?.Invoke(locationToItem);
+        }
+        catch (Exception e)
+        {
+            onFailureCallback?.Invoke(e);
+        }
     }
 
     /// <summary>
@@ -119,6 +136,22 @@ public class ArchipelagoClient
             outText = $"Successfully connected to {ServerData.Uri} as {ServerData.SlotName}!";
 
             ArchipelagoConsole.LogMessage(outText);
+
+            Plugin.BepinLogger.LogMessage("Attempting to set AP item names and descriptions");
+
+            long[] locationIds = new long[] { 1, 2 };
+
+            ScoutLocations((locationToItem) =>
+            {
+                var hoofman1 = Inventory.Player1Inventory.m_PermanentUpgradeItems[^1];
+                hoofman1.m_ItemName = locationToItem[1].ItemName;
+                hoofman1.m_ItemDescription = $"{locationToItem[1].Player.Name}'s {locationToItem[1].ItemName}";
+
+                var chester1 = Inventory.Player1Inventory.m_PermanentUpgradeItems[^2];
+                chester1.m_ItemName = locationToItem[2].ItemName;
+                chester1.m_ItemDescription = $"{locationToItem[2].Player.Name}'s {locationToItem[2].ItemName}";
+            },
+            null, locationIds );
         }
         else
         {
