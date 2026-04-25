@@ -7,7 +7,7 @@ namespace ShovelKnightDigAPClient.Patches
     [HarmonyPatch(typeof(ShieldKnight))]
     public class ShieldKnightPatch
     {
-        [HarmonyPatch(nameof(ShieldKnight.OnCreateDynamically))]
+        [HarmonyPatch(typeof(ShieldKnight), "OnCreateDynamically")]
         [HarmonyPostfix]
         public static void DisableKeyIfNotUnlocked(ShieldKnight __instance)
         {
@@ -16,16 +16,5 @@ namespace ShovelKnightDigAPClient.Patches
                 __instance.skeletonKey.SetActive(false);
             }
         }
-    }
-}
-
-// My first stub!
-public class ShieldKnight
-{
-    public GameObject skeletonKey;
-
-    public void OnCreateDynamically(Level level, AppearInOverworldCondition appearCondition)
-    {
-        throw new NotImplementedException();
     }
 }

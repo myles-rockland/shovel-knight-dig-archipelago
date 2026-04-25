@@ -9,7 +9,7 @@ namespace ShovelKnightDigAPClient.Patches
     [HarmonyPatch(typeof(ShopUI_new))]
     public class ShopUI_newPatch
     {
-        [HarmonyPatch(nameof(ShopUI_new.BuyItem))]
+        [HarmonyPatch(typeof(ShopUI_new), "BuyItem")]
         public static void HandleAPItems(ShopUI_new __instance, UIShopItem shopItem)
         {
             switch (shopItem.m_UpgradeItem.m_ID)
@@ -25,13 +25,5 @@ namespace ShovelKnightDigAPClient.Patches
                     break;
             }
         }
-    }
-}
-
-public class ShopUI_new
-{
-    public bool BuyItem(UIShopItem shopItem)
-    {
-        throw new NotImplementedException();
     }
 }

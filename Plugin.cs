@@ -26,7 +26,7 @@ namespace ShovelKnightDigAPClient
         public static ManualLogSource BepinLogger;
         public static ArchipelagoClient ArchipelagoClient;
 
-        private AssetBundle apAssetBundle;
+        public static AssetBundle ApAssetBundle;
 
         private void Awake()
         {
@@ -37,47 +37,6 @@ namespace ShovelKnightDigAPClient
 
             ArchipelagoConsole.LogMessage($"{ModDisplayInfo} loaded!");
 
-            // CUSTOM AP ITEM STUFF
-            var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-            string resourceName = $"{assemblyName}.assetbundles.ap";
-
-            apAssetBundle = BundleLoader.LoadEmbeddedBundle(resourceName);
-
-            if (apAssetBundle == null)
-            {
-                Logger.LogError("Failed to load bundle from memory");
-                return;
-            }
-
-            var upgradeItemPaths = new List<string>()
-            {
-                "Assets/Upgrade Items/AP Items/Hoofmans_Shop_1.asset",
-                "Assets/Upgrade Items/AP Items/Chester_Surface_Shop_1.asset",
-            };
-
-            Array.Resize(ref Inventory.Player1Inventory.m_PermanentUpgradeItems,
-                Inventory.Player1Inventory.m_PermanentUpgradeItems.Length + upgradeItemPaths.Count);
-
-            for (int i = upgradeItemPaths.Count - 1; i >= 0; i--)
-            {
-                var upgradeItemPath = upgradeItemPaths[i];
-                var upgradeItem = apAssetBundle.LoadAsset<UpgradeItem>(upgradeItemPath);
-                if (upgradeItem != null)
-                {
-                    BepinLogger.LogInfo($"Loaded: {upgradeItem.m_ItemName}");
-                }
-                else
-                {
-                    BepinLogger.LogInfo($"Failed to load UpgradeItem at {upgradeItemPath}");
-                }
-                Inventory.Player1Inventory.m_PermanentUpgradeItems[^(i + 1)] = upgradeItem;
-            }
-
-            // Then, when populating m_ItemCatalogue (which happens before ShopUI_new.CreateOverworldShopList),
-            // replace it with these!
-
-            //////////////////////////////////////////////////////////////////////////
-
             CreateSubscribers();
 
             _harmony.PatchAll();
@@ -86,7 +45,10 @@ namespace ShovelKnightDigAPClient
 
         private void OnDestroy()
         {
-            apAssetBundle.Unload(true);
+            if (ApAssetBundle != null)
+            {
+                ApAssetBundle.Unload(true);
+            }
         }
 
         private void OnGUI()
