@@ -49,6 +49,8 @@ namespace ShovelKnightDigAPClient
             {
                 ApAssetBundle.Unload(true);
             }
+
+            ArchipelagoClient.Disconnect();
         }
 
         private void OnGUI()

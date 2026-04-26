@@ -6,9 +6,11 @@ namespace ShovelKnightDigAPClient.Archipelago
     {
         public static void Handle(global::Archipelago.MultiClient.Net.Models.ItemInfo receivedItem)
         {
+            Plugin.BepinLogger.LogMessage("We received an item, handling it now!");
+
             switch (receivedItem.ItemId)
             {
-                case 0:
+                case 1:
                     {
                         // Cog on a String
                         Plugin.BepinLogger.LogMessage("Received Cog on a String Unlock!");
@@ -16,7 +18,7 @@ namespace ShovelKnightDigAPClient.Archipelago
                         SaveManager.Save();
                         break;
                     }
-                case 1:
+                case 2:
                     {
                         // Altius
                         Plugin.BepinLogger.LogMessage($"Received Altius in Overworld!");
@@ -24,7 +26,7 @@ namespace ShovelKnightDigAPClient.Archipelago
                         SaveManager.Save();
                         break;
                     }
-                case 2:
+                case 3:
                     {
                         // Skeleton Key
                         Plugin.BepinLogger.LogMessage($"Received Skeleton Key Unlock!");
@@ -32,18 +34,19 @@ namespace ShovelKnightDigAPClient.Archipelago
                         SaveManager.Save();
                         break;
                     }
-                case 3:
+                case 4:
                     {
                         // Follow Slot Upgrade
                         Plugin.BepinLogger.LogMessage("Received Follow Slot Upgrade!");
                         Inventory.Player1Inventory.IncrementMaxFollowItems();
                         break;
                     }
-                case 4:
+                case 5:
                     {
                         // Gems
                         Plugin.BepinLogger.LogMessage("Received 1000 Gems!");
                         StageController.totalGold += 1000; // TODO: Never use a magic number >:(
+                        UICanvas.UI.UpdateTotalGoldCounter();
                         SaveManager.SetInt("total gold", StageController.totalGold);
                         SaveManager.Save();
                         break;

@@ -16,7 +16,7 @@ namespace ShovelKnightDigAPClient.MonoBehaviours
 
         private void OnBossDefeated(StageController.THEME_ID theme)
         {
-            Plugin.BepinLogger.LogMessage($"Defeated boss in {theme.ToString()}!");
+            Plugin.BepinLogger.LogMessage($"Defeated boss in {theme.ToString()}, checking location!");
             long id = theme switch
             {
                 StageController.THEME_ID.MUSHROOM => 4,
@@ -28,7 +28,11 @@ namespace ShovelKnightDigAPClient.MonoBehaviours
                 StageController.THEME_ID.CHRYSTAL_CORE => 10,
                 _ => 0
             };
-            Plugin.ArchipelagoClient.CheckLocation(id);
+
+            if (id > 3 && id < 11)
+            {
+                Plugin.ArchipelagoClient.CheckLocation(id);
+            }
 
             if (id == 10) // TODO: This should be moved out to some APGoalHandler, since options can change goal so this might not be our goal
             {
